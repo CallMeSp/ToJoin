@@ -1,31 +1,11 @@
 package com.sp.tojoin;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
-import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.app.LoaderManager.LoaderCallbacks;
 
-import android.content.CursorLoader;
-import android.content.Loader;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.AsyncTask;
-
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -34,25 +14,24 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.nkzawa.socketio.client.Socket;
-import com.sp.tojoin.base.LogUtil;
+import com.sp.tojoin.IActivity.ILoginActivity;
+import com.sp.tojoin.biz.LoginHelper;
+import com.sp.tojoin.presenter.LoginPresenter;
 import com.sp.tojoin.service.SocketManager;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static android.Manifest.permission.READ_CONTACTS;
-
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity implements OnClickListener{
+public class LoginActivity extends AppCompatActivity implements OnClickListener,ILoginActivity{
 
     private static final String TAG = "LoginActivity";
 
     private Socket socket=null;
+
+    private LoginPresenter loginPresenter=new LoginPresenter(this);
 
     @BindView(R.id.edit_email)TextView email_text;
     @BindView(R.id.edit_password)TextView pwd_text;
@@ -86,8 +65,11 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener{
                     register_btn.setTextColor(getResources().getColor(R.color.white));
                 }else {
                     //提交注册申请的地方
-
-
+                    String address=email_text.getText().toString();
+                    String pwd=pwd_text.getText().toString();
+                    String check=checknum_text.getText().toString();
+                    int num=Integer.valueOf(check);
+                    doRegister(address,pwd,num);
                     //UI恢复
                     linearLayout.setVisibility(View.GONE);
                     register_btn.setBackgroundColor(getResources().getColor(R.color.gray));
@@ -101,15 +83,56 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener{
                 doLogin(address,pwd);
                 break;
             case R.id.btn_getemail:
-                doGetEmail("");
+                String emailaddress=email_text.getText().toString();
+                doGetEmail(emailaddress);
                 break;
         }
     }
     private void doGetEmail(String address){
-        socket.emit("getcheck","995199235@qq.com");
+        loginPresenter.getEmail(address);
+    }
+    private void doRegister(String address,String pwd,int check){
+        loginPresenter.register(address,pwd,check);
     }
     private void doLogin(String address,String pwd){
+        loginPresenter.login(address,pwd);
+    }
 
+    @Override
+    public void hideProgressBar() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                progressBar.setVisibility(View.GONE);
+            }
+        });
+    }
+
+    @Override
+    public void showProgressBar() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                progressBar.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
+    @Override
+    public void makeToast(String str) {
+        Toast.makeText(this,str,Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void loginFail() {
+        hideProgressBar();
+        makeToast("密码错误 ");
+    }
+
+    @Override
+    public void loginSuccess() {
+        hideProgressBar();
+        makeToast("登陆成功");
     }
 }
 
