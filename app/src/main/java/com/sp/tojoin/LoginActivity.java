@@ -1,5 +1,6 @@
 package com.sp.tojoin;
 
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
@@ -14,8 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.nkzawa.socketio.client.Socket;
-import com.sp.tojoin.IActivity.ILoginActivity;
-import com.sp.tojoin.biz.LoginHelper;
+import com.sp.tojoin.IListener.ILoginActivity;
 import com.sp.tojoin.presenter.LoginPresenter;
 import com.sp.tojoin.service.SocketManager;
 
@@ -119,8 +119,13 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener,
     }
 
     @Override
-    public void makeToast(String str) {
-        Toast.makeText(this,str,Toast.LENGTH_SHORT).show();
+    public void makeToast(final String str) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(LoginActivity.this,str,Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -133,6 +138,8 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener,
     public void loginSuccess() {
         hideProgressBar();
         makeToast("登陆成功");
+        Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+        startActivity(intent);
     }
 }
 

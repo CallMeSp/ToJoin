@@ -1,6 +1,6 @@
 package com.sp.tojoin.presenter;
 
-import com.sp.tojoin.IActivity.ILoginActivity;
+import com.sp.tojoin.IListener.ILoginActivity;
 import com.sp.tojoin.biz.LoginHelper;
 
 /**
@@ -34,6 +34,7 @@ public class LoginPresenter {
         iLoginActivity.hideProgressBar();
     }
     public void login(String address,String pwd){
+        //loginHelper.sendReqToLogin(address,pwd);
         loginHelper.sendReqToLogin(address,pwd);
     }
     public void loginSuc(){

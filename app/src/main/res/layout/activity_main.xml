@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.sp.tojoin.view.CustomViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </com.sp.tojoin.view.CustomViewPager>
+
+    <com.ashokvarma.bottomnavigation.BottomNavigationBar
+        android:id="@+id/main_bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom">
+
+    </com.ashokvarma.bottomnavigation.BottomNavigationBar>
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:src="@drawable/edit"
+        android:backgroundTint="@color/colorPrimary"/>
+</android.support.design.widget.CoordinatorLayout>
