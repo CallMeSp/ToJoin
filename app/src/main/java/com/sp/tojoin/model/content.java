@@ -6,4 +6,5 @@ package com.sp.tojoin.model;
 
 public class content {
     public String title;
+    public String contenturl;
 }

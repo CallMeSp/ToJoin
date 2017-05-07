@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="@color/colorPrimary">
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/button_back"
+        android:text="返回"
+        android:background="@android:color/transparent"
+        android:layout_alignParentLeft="true"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:text="发布"
+        android:background="@android:color/transparent"
+        android:id="@+id/button_passage"/>
+
+</RelativeLayout>

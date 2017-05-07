@@ -1,7 +1,9 @@
 package com.sp.tojoin;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -23,6 +25,7 @@ import butterknife.ButterKnife;
 public class MainActivity extends FragmentActivity implements BottomNavigationBar.OnTabSelectedListener{
     @BindView(R.id.main_bottomBar)BottomNavigationBar bottomNavigationBar;
     @BindView(R.id.viewpager)ViewPager pager;
+    @BindView(R.id.floatbutton)FloatingActionButton floatingActionButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +55,13 @@ public class MainActivity extends FragmentActivity implements BottomNavigationBa
             }
             @Override
             public void onPageScrollStateChanged(int state) {
+            }
+        });
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(MainActivity.this,EditActivity.class);
+                startActivity(intent);
             }
         });
     }

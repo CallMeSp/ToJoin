@@ -35,6 +35,9 @@ public interface RegisterApi {
     @POST("http://192.168.137.1:4000/content")
     Observable<ContentModel> getContentList(@Header("method")String head,@Body RequestBody requestBody);
 
+    @POST("http://192.168.137.1:4000/content")
+    Observable<ResponseBody> publishPassage(@Header("method")String head,@Body RequestBody requestBody);
+
     @Multipart
     @POST("upload")
     Call<ResponseBody> upload(@Part("description") RequestBody description,@Part MultipartBody.Part file);

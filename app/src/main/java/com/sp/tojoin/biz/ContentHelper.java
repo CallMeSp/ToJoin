@@ -71,7 +71,7 @@ public class ContentHelper {
                     }
                 });
     }
-    public void uploadImg(){
+    /*public void uploadImg(){
         Resources resources=Resources.getSystem();
         Bitmap bitmap=BitmapFactory.decodeResource(resources,R.drawable.splash);
 
@@ -103,7 +103,7 @@ public class ContentHelper {
                 Log.e("Upload error:", t.getMessage());
             }
         });
-    }
+    }*/
     public interface ContentListListener{
         void setContent(ArrayList<content> list);
     }

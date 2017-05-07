@@ -52,6 +52,9 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener,
         login_btn.setOnClickListener(this);
         register_btn.setOnClickListener(this);
         getemail_btn.setOnClickListener(this);
+
+        email_text.setText("995199235@qq.com");
+        pwd_text.setText("sp123465");
     }
 
     @Override
