@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
@@ -32,6 +33,8 @@ public class ContentFragment extends Fragment implements IContentFragment{
     private static final String TAG = "ContentFragment";
 
     private RecyclerView recyclerView;
+
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     private ContentPresent contentPresent=new ContentPresent(this);
 
@@ -70,6 +73,14 @@ public class ContentFragment extends Fragment implements IContentFragment{
             }
         });
         recyclerView.setAdapter(adapter);
+        swipeRefreshLayout=(SwipeRefreshLayout)view.findViewById(R.id.swipeRefrsh);
+        swipeRefreshLayout.setColorSchemeResources(R.color.blue,R.color.lightblue,R.color.darkblue,R.color.cadetblue);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                contentPresent.getContentList();
+            }
+        });
         return view;
     }
 
@@ -78,6 +89,7 @@ public class ContentFragment extends Fragment implements IContentFragment{
         this.contentlist.clear();
         this.contentlist.addAll(list);
         adapter.notifyDataSetChanged();
+        swipeRefreshLayout.setRefreshing(false);
         for (int i=0;i<list.size();i++){
             LogUtil.log("setContentArrayList:",list.get(i).title+"  url:  http://localhost:4000/content/ufcab9ff029cd11e79762e72f53de85e3/"+list.get(i).contenturl);
         }
