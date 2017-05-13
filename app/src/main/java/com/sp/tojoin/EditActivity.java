@@ -44,6 +44,12 @@ public class EditActivity extends Activity implements IEditActivity{
                 }
             }
         });
+        button_bcak.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
 }
