@@ -62,14 +62,15 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.MyViewHo
                 @Override
                 public void onClick(View v) {
                     String url=titleslist.get(position).contenturl;
-                    listener.onChoose(url);
+                    int id=titleslist.get(position).id;
+                    listener.onChoose(url,id);
                 }
             });
         }
     }
 
     public interface onItemSelectedListener{
-        void onChoose(String url);
+        void onChoose(String url,int id);
     }
 
     public void setItemSelectedListener(onItemSelectedListener listener){

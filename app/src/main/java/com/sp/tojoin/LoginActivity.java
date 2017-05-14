@@ -1,7 +1,6 @@
 package com.sp.tojoin;
 
 import android.content.Intent;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -43,7 +42,7 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener,
     @BindView(R.id.linear_register)LinearLayout linearLayout;
     @BindView(R.id.edit_username)EditText username_text;
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);

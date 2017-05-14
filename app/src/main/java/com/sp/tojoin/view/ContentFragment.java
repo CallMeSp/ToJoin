@@ -2,7 +2,6 @@ package com.sp.tojoin.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.sp.tojoin.IListener.IContentFragment;
 import com.sp.tojoin.PassageDetailActivity;
@@ -24,6 +24,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.annotations.Nullable;
 
 /**
  * Created by Administrator on 2017/4/20.
@@ -44,6 +45,7 @@ public class ContentFragment extends Fragment implements IContentFragment{
 
     private String myuuid;
 
+
     public static ContentFragment getInstance(){
         ContentFragment contentFragment=new ContentFragment();
         return contentFragment;
@@ -63,18 +65,19 @@ public class ContentFragment extends Fragment implements IContentFragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.frag_content,container,false);
+
         recyclerView=(RecyclerView)view.findViewById(R.id.recycler_content);
         final LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(OrientationHelper.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
-
         adapter.setItemSelectedListener(new ContentAdapter.onItemSelectedListener() {
             @Override
-            public void onChoose(String url) {
-                String contenturl="http://10.163.216.100:4000/content/"+url;
+            public void onChoose(String url,int id) {
+                String contenturl="http://192.168.137.1:4000/content/"+url;
                 LogUtil.log(TAG,"url:"+contenturl);
                 Intent intent=new Intent(getActivity(), PassageDetailActivity.class);
                 intent.putExtra("contenturl",contenturl);
+                intent.putExtra("id",id+"");
                 startActivity(intent);
             }
         });
@@ -87,6 +90,8 @@ public class ContentFragment extends Fragment implements IContentFragment{
                 contentPresent.getContentList(myuuid);
             }
         });
+
+
         return view;
     }
 
@@ -97,7 +102,7 @@ public class ContentFragment extends Fragment implements IContentFragment{
         adapter.notifyDataSetChanged();
         swipeRefreshLayout.setRefreshing(false);
         for (int i=0;i<list.size();i++){
-            LogUtil.log("setContentArrayList:",list.get(i).title+"   http://10.163.216.100:4000/content/"+list.get(i).contenturl);
+            LogUtil.log("setContentArrayList:","id:"+list.get(i).id+"  title"+list.get(i).title+"   http://192.168.137.1:4000/content/"+list.get(i).contenturl);
         }
 
     }

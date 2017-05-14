@@ -17,6 +17,7 @@ public class ContentPresent {
         this.iContentFragment=iContentFragment;
         contentHelper=new ContentHelper(this);
     }
+
     public void getContentList(String uuid){
         contentHelper.getContentList(uuid, new ContentHelper.ContentListListener() {
             @Override
@@ -26,4 +27,7 @@ public class ContentPresent {
         });
     }
 
+    public void makeComments(String uuid,int id,String content,String fromwho){
+
+    }
 }

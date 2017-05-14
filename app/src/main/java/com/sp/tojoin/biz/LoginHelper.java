@@ -32,7 +32,7 @@ public class LoginHelper {
     public LoginHelper(LoginPresenter presenter) {
         loginPresenter=presenter;
         retrofit=new Retrofit.Builder()
-                .baseUrl("http://10.163.216.100:4000/")
+                .baseUrl("http://192.168.137.1:4000/")
                 .client(new OkHttpClient())
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

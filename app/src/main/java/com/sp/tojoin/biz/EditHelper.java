@@ -32,7 +32,7 @@ public class EditHelper {
     public EditHelper(EditPresenter presenter) {
         this.presenter=presenter;
         retrofit=new Retrofit.Builder()
-                .baseUrl("http://10.163.216.100:4000/")
+                .baseUrl("http://192.168.137.1:4000/")
                 .client(new OkHttpClient())
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -59,12 +59,12 @@ public class EditHelper {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        LogUtil.log("insertpassageRes","error");
                     }
 
                     @Override
                     public void onComplete() {
-
+                        LogUtil.log("insertpassageRes","complete");
                     }
                 });
 
