@@ -17,8 +17,8 @@ public class EditPresenter {
         this.iEditActivity=iEditActivity;
         editHelper=new EditHelper(this);
     }
-    public void publisPassage(String user,String title,String content){
-        editHelper.publishPassage(user,title,content);
+    public void publisPassage(String uuid,String title,String content){
+        editHelper.publishPassage(uuid,title,content);
     }
 
 

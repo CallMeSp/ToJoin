@@ -26,7 +26,7 @@ public class MainActivity extends FragmentActivity implements BottomNavigationBa
     @BindView(R.id.main_bottomBar)BottomNavigationBar bottomNavigationBar;
     @BindView(R.id.viewpager)ViewPager pager;
     @BindView(R.id.floatbutton)FloatingActionButton floatingActionButton;
-
+    private String myuuid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,9 +61,13 @@ public class MainActivity extends FragmentActivity implements BottomNavigationBa
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(MainActivity.this,EditActivity.class);
+                intent.putExtra("uuid",myuuid);
                 startActivity(intent);
             }
         });
+
+        Intent intent=getIntent();
+        myuuid=intent.getStringExtra("uuid");
     }
 
     @Override

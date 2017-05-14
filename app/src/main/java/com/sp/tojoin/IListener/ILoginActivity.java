@@ -8,6 +8,6 @@ public interface ILoginActivity {
     void showProgressBar();
     void hideProgressBar();
     void makeToast(String str);
-    void loginSuccess();
+    void loginSuccess(String uuid);
     void loginFail();
 }

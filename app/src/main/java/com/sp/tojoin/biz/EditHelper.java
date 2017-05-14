@@ -32,7 +32,7 @@ public class EditHelper {
     public EditHelper(EditPresenter presenter) {
         this.presenter=presenter;
         retrofit=new Retrofit.Builder()
-                .baseUrl("http://192.168.137.1:4000/")
+                .baseUrl("http://10.163.216.100:4000/")
                 .client(new OkHttpClient())
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -40,8 +40,8 @@ public class EditHelper {
         registerApi=retrofit.create(RegisterApi.class);
     }
 
-    public void publishPassage(String user,String title,String content){
-        String s="{ \"uuid\":" +"\""+user+"\",\"title\":\""+title+"\",\"content\":\""+content+"\"}";
+    public void publishPassage(String uuid,String title,String content){
+        String s="{ \"uuid\":" +"\""+uuid+"\",\"title\":\""+title+"\",\"content\":\""+content+"\"}";
         LogUtil.log("sendreq:",s);
         RequestBody requestBody=RequestBody.create(MediaType.parse("application/json"),s);
         registerApi.publishPassage("insertpassage",requestBody)

@@ -32,7 +32,7 @@ public class LoginHelper {
     public LoginHelper(LoginPresenter presenter) {
         loginPresenter=presenter;
         retrofit=new Retrofit.Builder()
-                .baseUrl("http://192.168.137.1:4000/")
+                .baseUrl("http://10.163.216.100:4000/")
                 .client(new OkHttpClient())
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -72,11 +72,12 @@ public class LoginHelper {
                     }
                 });
     }
-    public void sendReqToRegister(String address, String pwd, int num){
+    public void sendReqToRegister(String address, String username,String pwd, int num){
         loginPresenter.showBar();
         String s="{ \"address\":" +"\""+address+"\","+
                 "\"pwd\":"+"\""+pwd+"\","+
-                "\"num\":"+num+
+                "\"num\":"+num+","+
+                "\"username\":\""+username+"\""+
                 "}";
         final RequestBody requestBody=RequestBody.create(MediaType.parse("application/json"),s);
         registerApi.toRegister("register",requestBody)
@@ -125,7 +126,7 @@ public class LoginHelper {
                             if (res.equals("loginFail")){
                                 loginPresenter.loginFail();
                             }else{
-                                loginPresenter.loginSuc();
+                                loginPresenter.loginSuc(res);
                             }
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -134,7 +135,7 @@ public class LoginHelper {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        LogUtil.log("login:","error");
                     }
 
                     @Override

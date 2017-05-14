@@ -1,6 +1,7 @@
 package com.sp.tojoin;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -33,14 +34,16 @@ public class EditActivity extends Activity implements IEditActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
         ButterKnife.bind(this);
-
+        Intent intent=getIntent();
+        final String myuuid=intent.getStringExtra("uuid");
         button_passage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (editText_title.getText()!=null&&editText_content!=null){
                     String title=editText_title.getText().toString();
                     String content=editText_content.getText().toString();
-                    presenter.publisPassage("ufcab9ff029cd11e79762e72f53de85e3",title,content);
+
+                    presenter.publisPassage(myuuid,title,content);
                 }
             }
         });

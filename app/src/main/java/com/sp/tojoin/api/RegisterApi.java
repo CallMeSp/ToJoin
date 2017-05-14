@@ -23,19 +23,19 @@ import retrofit2.http.Query;
 
 public interface RegisterApi {
 
-    @POST("http://192.168.137.1:4000/register")
+    @POST("http://10.163.216.100:4000/register")
     Observable<ResponseBody> getEmail(@Header("method") String head,@Body RequestBody requestBody);
 
-    @POST("http://192.168.137.1:4000/register")
+    @POST("http://10.163.216.100:4000/register")
     Observable<ResponseBody> toRegister(@Header("method") String head,@Body RequestBody requestBody);
 
-    @POST("http://192.168.137.1:4000/register")
+    @POST("http://10.163.216.100:4000/register")
     Observable<ResponseBody> toLogin(@Header("method") String head,@Body RequestBody requestBody);
 
-    @POST("http://192.168.137.1:4000/content")
+    @POST("http://10.163.216.100:4000/content")
     Observable<ContentModel> getContentList(@Header("method")String head,@Body RequestBody requestBody);
 
-    @POST("http://192.168.137.1:4000/content")
+    @POST("http://10.163.216.100:4000/content")
     Observable<ResponseBody> publishPassage(@Header("method")String head,@Body RequestBody requestBody);
 
     @Multipart

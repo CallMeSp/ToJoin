@@ -17,8 +17,8 @@ public class ContentPresent {
         this.iContentFragment=iContentFragment;
         contentHelper=new ContentHelper(this);
     }
-    public void getContentList(){
-        contentHelper.getContentList("ufcab9ff029cd11e79762e72f53de85e3;", new ContentHelper.ContentListListener() {
+    public void getContentList(String uuid){
+        contentHelper.getContentList(uuid, new ContentHelper.ContentListListener() {
             @Override
             public void setContent(ArrayList<content> list) {
                 iContentFragment.setContentArrayList(list);

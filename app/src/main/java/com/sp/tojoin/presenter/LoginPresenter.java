@@ -21,8 +21,8 @@ public class LoginPresenter {
     public void getEmail(String address){
         loginHelper.sendReqToGetEmail(address);
     }
-    public void register(String address,String pwd,int check){
-        loginHelper.sendReqToRegister(address,pwd,check);
+    public void register(String address,String username,String pwd,int check){
+        loginHelper.sendReqToRegister(address,username,pwd,check);
     }
     public void makeToast(String str){
         iLoginActivity.makeToast(str);
@@ -37,8 +37,8 @@ public class LoginPresenter {
         //loginHelper.sendReqToLogin(address,pwd);
         loginHelper.sendReqToLogin(address,pwd);
     }
-    public void loginSuc(){
-        iLoginActivity.loginSuccess();
+    public void loginSuc(String uuid){
+        iLoginActivity.loginSuccess(uuid);
     }
     public void loginFail(){
         iLoginActivity.loginFail();

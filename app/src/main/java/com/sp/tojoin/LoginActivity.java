@@ -41,6 +41,7 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener,
     @BindView(R.id.btn_getemail)Button getemail_btn;
     @BindView(R.id.edit_checknum)EditText checknum_text;
     @BindView(R.id.linear_register)LinearLayout linearLayout;
+    @BindView(R.id.edit_username)EditText username_text;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +54,7 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener,
         register_btn.setOnClickListener(this);
         getemail_btn.setOnClickListener(this);
 
+        username_text.setText("CallMeSp");
         email_text.setText("995199235@qq.com");
         pwd_text.setText("sp123456");
     }
@@ -71,8 +73,10 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener,
                     String address=email_text.getText().toString();
                     String pwd=pwd_text.getText().toString();
                     String check=checknum_text.getText().toString();
+                    String username=username_text.getText().toString();
                     int num=Integer.valueOf(check);
-                    doRegister(address,pwd,num);
+                    //提交注册申请
+                    doRegister(address,username,pwd,num);
                     //UI恢复
                     linearLayout.setVisibility(View.GONE);
                     register_btn.setBackgroundColor(getResources().getColor(R.color.gray));
@@ -94,8 +98,8 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener,
     private void doGetEmail(String address){
         loginPresenter.getEmail(address);
     }
-    private void doRegister(String address,String pwd,int check){
-        loginPresenter.register(address,pwd,check);
+    private void doRegister(String address,String username,String pwd,int check){
+        loginPresenter.register(address,username,pwd,check);
     }
     private void doLogin(String address,String pwd){
         loginPresenter.login(address,pwd);
@@ -138,10 +142,11 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener,
     }
 
     @Override
-    public void loginSuccess() {
+    public void loginSuccess(String uuid) {
         hideProgressBar();
         makeToast("登陆成功");
         Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+        intent.putExtra("uuid",uuid);
         startActivity(intent);
     }
 }
