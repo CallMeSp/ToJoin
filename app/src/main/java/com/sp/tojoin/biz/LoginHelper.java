@@ -1,6 +1,7 @@
 package com.sp.tojoin.biz;
 
 import com.sp.tojoin.api.RegisterApi;
+import com.sp.tojoin.base.JsonUtils;
 import com.sp.tojoin.base.LogUtil;
 import com.sp.tojoin.presenter.LoginPresenter;
 
@@ -40,7 +41,10 @@ public class LoginHelper {
         registerApi=retrofit.create(RegisterApi.class);
     }
     public void sendReqToGetEmail(String address){
-        String s="{ \"address\":" +"\""+address+"\"}";
+        //String s="{ \"address\":" +"\""+address+"\"}";
+        String s= JsonUtils.Builder()
+                .addItem("address",address)
+                .build();
         RequestBody requestBody=RequestBody.create(MediaType.parse("application/json"),s);
         registerApi.getEmail("getEmail",requestBody)
                 .subscribeOn(Schedulers.newThread())

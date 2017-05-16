@@ -56,6 +56,7 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener,
         username_text.setText("CallMeSp");
         email_text.setText("995199235@qq.com");
         pwd_text.setText("sp123456");
+
     }
 
     @Override

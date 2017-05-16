@@ -1,6 +1,7 @@
 package com.sp.tojoin.biz;
 
 import com.sp.tojoin.api.RegisterApi;
+import com.sp.tojoin.base.JsonUtils;
 import com.sp.tojoin.base.LogUtil;
 import com.sp.tojoin.presenter.EditPresenter;
 
@@ -41,7 +42,12 @@ public class EditHelper {
     }
 
     public void publishPassage(String uuid,String title,String content){
-        String s="{ \"uuid\":" +"\""+uuid+"\",\"title\":\""+title+"\",\"content\":\""+content+"\"}";
+        //String s="{ \"uuid\":" +"\""+uuid+"\",\"title\":\""+title+"\",\"content\":\""+content+"\"}";
+        String s= JsonUtils.Builder()
+                .addItem("uuid",uuid)
+                .addItem("title",title)
+                .addItem("content",content)
+                .build();
         LogUtil.log("sendreq:",s);
         RequestBody requestBody=RequestBody.create(MediaType.parse("application/json"),s);
         registerApi.publishPassage("insertpassage",requestBody)

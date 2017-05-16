@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.sp.tojoin.R;
 import com.sp.tojoin.api.RegisterApi;
+import com.sp.tojoin.base.JsonUtils;
 import com.sp.tojoin.base.LogUtil;
 import com.sp.tojoin.model.ContentModel;
 import com.sp.tojoin.model.content;
@@ -50,7 +51,10 @@ public class ContentHelper {
         registerApi=retrofit.create(RegisterApi.class);
     }
     public void getContentList(String uuid, final ContentListListener contentListListener){
-        String s="{ \"uuid\":" +"\""+uuid+"\"}";
+        //String s="{ \"uuid\":" +"\""+uuid+"\"}";
+        String s= JsonUtils.Builder()
+                .addItem("uuid",uuid)
+                .build();
         RequestBody requestBody=RequestBody.create(MediaType.parse("application/json"),s);
         registerApi.getContentList("getMyArticleList",requestBody)
                 .subscribeOn(Schedulers.newThread())
