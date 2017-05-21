@@ -1,6 +1,7 @@
 package com.sp.tojoin.api;
 
 import com.sp.tojoin.model.ContentModel;
+import com.sp.tojoin.model.ReviewModel;
 
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
@@ -39,7 +40,10 @@ public interface RegisterApi {
     Observable<ResponseBody> publishPassage(@Header("method")String head,@Body RequestBody requestBody);
 
     @POST("http://192.168.137.1:4000/content")
-    Observable<ResponseBody>makeComments(@Header("method")String head,@Body RequestBody requestBody);
+    Observable<ResponseBody> makeReview(@Header("method")String head,@Body RequestBody requestBody);
+
+    @POST("http://192.168.137.1:4000/content")
+    Observable<ReviewModel> getReviewList(@Header("method")String head, @Body RequestBody requestBody);
 
     @Multipart
     @POST("upload")

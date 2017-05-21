@@ -58,7 +58,9 @@ public class ContentFragment extends Fragment implements IContentFragment{
         adapter=new ContentAdapter(getContext(),contentlist);
         myuuid=getActivity().getIntent().getStringExtra("uuid");
         LogUtil.log("myuuid",myuuid);
-        contentPresent.getContentList(myuuid);
+
+        //myuuid="common";
+        contentPresent.getContentList("common");
     }
 
     @Nullable
@@ -72,12 +74,14 @@ public class ContentFragment extends Fragment implements IContentFragment{
         recyclerView.setLayoutManager(linearLayoutManager);
         adapter.setItemSelectedListener(new ContentAdapter.onItemSelectedListener() {
             @Override
-            public void onChoose(String url,int id) {
+            public void onChoose(String url,String writter,int id) {
                 String contenturl="http://192.168.137.1:4000/content/"+url;
                 LogUtil.log(TAG,"url:"+contenturl);
                 Intent intent=new Intent(getActivity(), PassageDetailActivity.class);
                 intent.putExtra("contenturl",contenturl);
                 intent.putExtra("id",id+"");
+                intent.putExtra("writter",writter);
+                intent.putExtra("myuuid",myuuid);
                 startActivity(intent);
             }
         });
@@ -87,7 +91,8 @@ public class ContentFragment extends Fragment implements IContentFragment{
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                contentPresent.getContentList(myuuid);
+                //contentPresent.getContentList(myuuid);
+                contentPresent.getContentList("common");
             }
         });
 
@@ -102,7 +107,7 @@ public class ContentFragment extends Fragment implements IContentFragment{
         adapter.notifyDataSetChanged();
         swipeRefreshLayout.setRefreshing(false);
         for (int i=0;i<list.size();i++){
-            LogUtil.log("setContentArrayList:","id:"+list.get(i).id+"  title"+list.get(i).title+"   http://192.168.137.1:4000/content/"+list.get(i).contenturl);
+            LogUtil.log("setContentArrayList:","id:"+list.get(i).id+" writter:"+list.get(i).writter+"  title"+list.get(i).title+"   http://192.168.137.1:4000/content/"+list.get(i).contenturl);
         }
 
     }

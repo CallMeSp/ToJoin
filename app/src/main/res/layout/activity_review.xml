@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/sendbar">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="@android:color/holo_blue_light"
+            android:textColor="@android:color/white"
+            android:text="发送"
+            android:id="@+id/btn_sendreview"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_toLeftOf="@id/btn_sendreview"
+            android:layout_height="?attr/actionBarSize"
+            android:hint="请输入内容..."
+            android:background="@android:color/white"
+            android:id="@+id/edit_reviewcontent"/>
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_above="@+id/sendbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/recycler_reviewlist"
+        android:overScrollMode="never"/>
+</RelativeLayout>

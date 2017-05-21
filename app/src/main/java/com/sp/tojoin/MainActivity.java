@@ -50,7 +50,6 @@ public class MainActivity extends FragmentActivity implements BottomNavigationBa
             }
             @Override
             public void onPageSelected(int position) {
-                LogUtil.log("onPageSelected",position+"");
                 bottomNavigationBar.selectTab(position);
             }
             @Override
@@ -78,7 +77,6 @@ public class MainActivity extends FragmentActivity implements BottomNavigationBa
     @Override
     public void onTabSelected(int position) {
         pager.setCurrentItem(position);
-        LogUtil.log("position",position+"");
     }
 
     @Override

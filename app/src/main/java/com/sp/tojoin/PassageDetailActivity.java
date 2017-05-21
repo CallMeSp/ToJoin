@@ -29,6 +29,12 @@ public class PassageDetailActivity extends Activity {
 
     @BindView(R.id.btn_review)Button btn_review;
 
+
+    //文章的序号和作者，从intent中获取，用于访问文章。
+    int id;
+    String writter;
+    String myuuid;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +42,9 @@ public class PassageDetailActivity extends Activity {
         ButterKnife.bind(this);
         Intent intent=getIntent();
         String url=intent.getStringExtra("contenturl");
-        int id=Integer.valueOf(intent.getStringExtra("id"));
+        id=Integer.valueOf(intent.getStringExtra("id"));
+        writter=intent.getStringExtra("writter");
+        myuuid=intent.getStringExtra("myuuid");
         LogUtil.log(TAG,"url:"+url);
         webView.getSettings().setJavaScriptEnabled(true);
 
@@ -45,7 +53,11 @@ public class PassageDetailActivity extends Activity {
         btn_review.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent1=new Intent(PassageDetailActivity.this,ReviewActivity.class);
+                intent1.putExtra("writter",writter);
+                intent1.putExtra("id",id+"");
+                intent1.putExtra("myuuid",myuuid);
+                startActivity(intent1);
             }
         });
     }
