@@ -66,6 +66,7 @@ public class ContentFragment extends Fragment implements IContentFragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         View view=inflater.inflate(R.layout.frag_content,container,false);
 
         recyclerView=(RecyclerView)view.findViewById(R.id.recycler_content);

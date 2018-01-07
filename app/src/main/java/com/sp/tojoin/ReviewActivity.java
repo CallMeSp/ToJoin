@@ -1,6 +1,7 @@
 package com.sp.tojoin;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.sp.tojoin.IListener.IReviewActivity;
 import com.sp.tojoin.adapter.ReviewAdapter;
@@ -27,6 +29,8 @@ import butterknife.ButterKnife;
  */
 
 public class ReviewActivity extends Activity implements IReviewActivity{
+
+    private Context context=this;
 
     private static final String TAG = "ReviewActivity";
 
@@ -91,5 +95,16 @@ public class ReviewActivity extends Activity implements IReviewActivity{
         reviewArrayList.clear();
         reviewArrayList.addAll(list);
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void initialize() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                editText.setText("");
+                Toast.makeText(context,"评论成功",Toast.LENGTH_SHORT);
+            }
+        });
     }
 }

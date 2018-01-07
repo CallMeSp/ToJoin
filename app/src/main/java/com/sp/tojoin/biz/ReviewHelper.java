@@ -78,12 +78,13 @@ public class ReviewHelper {
                 });
     }
 
-    public void makeReview(String content,String myuuid,String writter,int id){
+    public void makeReview(String content, String myuuid, String writter, int id, final iReviewResultListener listener){
         //获取当前时间
         SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd日 HH:mm:ss");
         Date curDate=new Date(System.currentTimeMillis());
         String time=formatter.format(curDate);
 
+        //合成json信息
         String str=JsonUtils.Builder()
                 .addItem("fromwho",myuuid)
                 .addItem("content",content)
@@ -102,6 +103,10 @@ public class ReviewHelper {
                         try {
                             String res=responseBody.string();
                             LogUtil.log(TAG,"onNext:"+res);
+                            if (res.equals("ReviewSuc")){
+                                LogUtil.log(TAG,"listenerSuc");
+                                listener.getResult(true);
+                            }
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -118,6 +123,8 @@ public class ReviewHelper {
                     }
                 });
 
-
+    }
+    public interface iReviewResultListener{
+        void getResult(Boolean result);
     }
 }

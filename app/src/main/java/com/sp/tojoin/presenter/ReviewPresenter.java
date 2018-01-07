@@ -27,8 +27,16 @@ public class ReviewPresenter {
         reviewHelper.getReviewList(writter,id);
     }
 
-    public void makeReview(String content,String myuuid,String writter,int id){
-        reviewHelper.makeReview(content,myuuid,writter,id);
+    public void makeReview(String content, String myuuid, final String writter, final int id){
+        reviewHelper.makeReview(content, myuuid, writter, id, new ReviewHelper.iReviewResultListener() {
+            @Override
+            public void getResult(Boolean result) {
+                if (result){
+                    iReviewActivity.initialize();
+                    getReviewList(writter,id);
+                }
+            }
+        });
     }
 
     public void updateList(ArrayList<Review> list){

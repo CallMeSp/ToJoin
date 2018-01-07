@@ -10,4 +10,5 @@ import java.util.ArrayList;
 
 public interface IReviewActivity {
     void updateList(ArrayList<Review> list);
+    void initialize();
 }
